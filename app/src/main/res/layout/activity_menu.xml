@@ -15,5 +15,6 @@
         android:text="Start Game"
         android:id="@+id/startGameBtn"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="startGame"/>
 </RelativeLayout>
