@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.ImageView;
 
 import CheckersFramework.Board;
 import CheckersFramework.Status;
@@ -70,6 +71,16 @@ class BoardAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         return null;
+    }
+
+    class ViewHolder {
+
+        ImageView piece;
+
+        ViewHolder(View v) {
+            this.piece = (ImageView) v.findViewById(R.id.imageView);
+        }
+
     }
 
 }
