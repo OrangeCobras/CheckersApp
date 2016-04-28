@@ -20,4 +20,17 @@
         android:clickable="false"
         android:onClick="finish"
         android:nestedScrollingEnabled="false" />
+
+    <GridView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gridViewGame"
+        android:layout_below="@+id/endGameBtn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:numColumns="10"
+        android:stretchMode="spacingWidthUniform"
+        android:horizontalSpacing="0dp"
+        android:verticalSpacing="0dp"
+        android:columnWidth="35dp" />
 </RelativeLayout>
