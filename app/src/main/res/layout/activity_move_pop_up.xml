@@ -31,7 +31,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editTextPosY"
-        android:layout_below="@+id/editTextPos"
+        android:ems="4"
+        android:layout_below="@+id/editTextPosX"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -40,7 +41,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Enter Direction 1 is NorthEast , 2 is NorthWest, 3 is Southeast, 4 is Southwest"
         android:id="@+id/textViewDir"
-        android:layout_below="@+id/editTextPos"
+        android:layout_below="@+id/editTextPosY"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp" />
 
@@ -75,6 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ok"
+        android:ems="4"
         android:id="@+id/button"
         android:layout_below="@+id/editTextSca"
         android:layout_centerHorizontal="true"
