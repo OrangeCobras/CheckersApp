@@ -18,7 +18,9 @@
         <activity android:name=".Game"
             android:parentActivityName=".Menu">
         </activity>
-        <activity android:name=".MovePopUp"
+        <activity
+            android:theme="@android:style/Theme.Dialog"
+            android:name=".MovePopUp"
             android:parentActivityName=".Game">
         </activity>
     </application>

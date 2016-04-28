@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Enter Position"
+        android:text="Enter Position x y"
         android:id="@+id/textViewPos"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -21,17 +21,24 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextPos"
+        android:id="@+id/editTextPosX"
         android:inputType="number"
         android:ems="4"
         android:layout_below="@+id/textViewPos"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextPosY"
+        android:layout_below="@+id/editTextPos"
         android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Enter Direction"
+        android:text="Enter Direction 1 is NorthEast , 2 is NorthWest, 3 is Southeast, 4 is Southwest"
         android:id="@+id/textViewDir"
         android:layout_below="@+id/editTextPos"
         android:layout_centerHorizontal="true"
@@ -40,7 +47,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextDir"
+        android:id="@+id/editTextDirX"
         android:inputType="number"
         android:ems="4"
         android:layout_below="@+id/textViewDir"
@@ -63,4 +70,15 @@
         android:ems="4"
         android:layout_below="@+id/textViewSca"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ok"
+        android:id="@+id/button"
+        android:layout_below="@+id/editTextSca"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="44dp"
+        android:onClick="close_dialogue"/>
+
 </RelativeLayout>

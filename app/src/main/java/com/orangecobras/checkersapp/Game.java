@@ -1,28 +1,33 @@
 package com.orangecobras.checkersapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
-import java.util.ArrayList;
-
 /**
  * Created by Janne on 27.04.2016.
  */
-public class Game extends AppCompatActivity implements CheckersFramework.View , CheckersFramework.MoveGetter, AdapterView.OnItemClickListenerClickListener{
+public class Game extends AppCompatActivity implements CheckersFramework.MoveGetter, CheckersFramework.View{
 
     private GridView gridView;
     private CheckersFramework.Board board;
     private CheckersFramework.Status status;
+
+    static int scalar;
+    static int posX;
+    static int posY;
+    static int dirX;
+    CheckersFramework.Direction d;
+    CheckersFramework.Move m;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +39,18 @@ public class Game extends AppCompatActivity implements CheckersFramework.View , 
     }
 
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i ,long l){
-
+    public CheckersFramework.Move getMove(){
+        Intent intent = new Intent(this, MovePopUp.class);
+        startActivity(intent);
+        switch(dirX){
+            case 1: d = CheckersFramework.Direction.NorthEeast;
+            case 2: d = CheckersFramework.Direction.NorthWest;
+            case 3: d = CheckersFramework.Direction.SouthEeast;
+            case 4: d = CheckersFramework.Direction.SouthWest;
+        }
+        return new CheckersFramework.Move(new CheckersFramework.Point(posX,posY), d,scalar);
     }
+
 
     public void setBoard(CheckersFramework.Board board){
         this.board = board;
@@ -53,8 +67,8 @@ public class Game extends AppCompatActivity implements CheckersFramework.View , 
      */
     public void invalidate(){
 
-    }
 
+    }
 }
 
 class Piece{
@@ -66,7 +80,7 @@ class Piece{
 }
 
 
-class Adapter extends BaseAdapter implements CheckersFramework.View{
+class Adapter extends BaseAdapter{
 
     Context context;
     CheckersFramework.Board board;
@@ -75,8 +89,8 @@ class Adapter extends BaseAdapter implements CheckersFramework.View{
 
         this.context = context;
         Resources res = context.getResources();
-        CheckersFramework.Game.board;
     }
+
 
 
     @Override
@@ -87,7 +101,7 @@ class Adapter extends BaseAdapter implements CheckersFramework.View{
     @Override
     public Object getItem(int i) {
         CheckersFramework.Piece p = CheckersFramework.Game.board.getPiece(new CheckersFramework.Point(i%9,i/9));
-        return (Java.Lang.Object)p;
+        return p;
     }
 
     @Override
@@ -117,12 +131,12 @@ class Adapter extends BaseAdapter implements CheckersFramework.View{
         else{
             holder = (ViewHolder) row.getTag();
         }
-        Piece p = board.getItem(i);
-        switch(Game.board.getPiece(new CheckersFramework.Point(i%9,i/9)).getColor()){
-            case CheckersFramework.Piece.Black: holder.Piece.setImageResource(R.drawable.BlackPiece);
-            case CheckersFramework.Piece.BlackKing:holder.Piece.setImageResource(R.drawable.BlackPieceKing);
-            case CheckersFramework.Piece.White:holder.Piece.setImageResource(R.drawable.WhitePiece);
-            case CheckersFramework.Piece.WhiteKing:holder.Piece.setImageResource(R.drawable.WhitePieceKing);
+        switch(this.board.getPiece(new CheckersFramework.Point(i%9,i/9))){
+            case Black: holder.Piece.setImageResource(R.drawable.BlackPiece);
+            case BlackKing:holder.Piece.setImageResource(R.drawable.BlackPieceKing);
+            case White:holder.Piece.setImageResource(R.drawable.WhitePiece);
+            case WhiteKing:holder.Piece.setImageResource(R.drawable.WhitePieceKing);
         }
+        return row;
     }
 }
