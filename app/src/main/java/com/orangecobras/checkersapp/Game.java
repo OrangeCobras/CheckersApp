@@ -29,7 +29,6 @@ public class Game extends AppCompatActivity implements CheckersFramework.MoveGet
     CheckersFramework.Direction d;
     CheckersFramework.Move m;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
