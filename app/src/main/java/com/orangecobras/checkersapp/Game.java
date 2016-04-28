@@ -20,6 +20,7 @@ public class Game extends AppCompatActivity implements CheckersFramework.MoveGet
     private GridView gridView;
     private CheckersFramework.Board board;
     private CheckersFramework.Status status;
+    private CheckersFramework.Game game;
 
     static int scalar;
     static int posX;
@@ -34,8 +35,9 @@ public class Game extends AppCompatActivity implements CheckersFramework.MoveGet
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         gridView = (GridView) findViewById(R.id.gridview);
-        gridView.setAdapter(new Adapter(this));
-        CheckersFramework.Game.start();
+        gridView.setAdapter(new Adapter(this,board));
+        game = new CheckersFramework.Game(this);
+        game.start();
     }
 
     @Override
@@ -66,8 +68,7 @@ public class Game extends AppCompatActivity implements CheckersFramework.MoveGet
      * This means the view needs to be redrawn.
      */
     public void invalidate(){
-
-
+        gridView.postInvalidate();
     }
 }
 
@@ -85,10 +86,11 @@ class Adapter extends BaseAdapter{
     Context context;
     CheckersFramework.Board board;
 
-    Adapter(Context context){
+    Adapter(Context context, CheckersFramework.Board board){
 
         this.context = context;
         Resources res = context.getResources();
+        this.board = board;
     }
 
 
@@ -100,7 +102,7 @@ class Adapter extends BaseAdapter{
 
     @Override
     public Object getItem(int i) {
-        CheckersFramework.Piece p = CheckersFramework.Game.board.getPiece(new CheckersFramework.Point(i%9,i/9));
+        CheckersFramework.Piece p = board.getPiece(new CheckersFramework.Point(i%9,i/9));
         return p;
     }
 
@@ -131,11 +133,11 @@ class Adapter extends BaseAdapter{
         else{
             holder = (ViewHolder) row.getTag();
         }
-        switch(this.board.getPiece(new CheckersFramework.Point(i%9,i/9))){
-            case Black: holder.Piece.setImageResource(R.drawable.BlackPiece);
-            case BlackKing:holder.Piece.setImageResource(R.drawable.BlackPieceKing);
-            case White:holder.Piece.setImageResource(R.drawable.WhitePiece);
-            case WhiteKing:holder.Piece.setImageResource(R.drawable.WhitePieceKing);
+        switch(board.getPiece(new CheckersFramework.Point(i%9,i/9))){
+            case Black: holder.Piece.setImageResource(R.drawable.blackpiece);
+            case BlackKing:holder.Piece.setImageResource(R.drawable.blackpieceking);
+            case White:holder.Piece.setImageResource(R.drawable.whitepiece);
+            case WhiteKing:holder.Piece.setImageResource(R.drawable.whitepieceking);
         }
         return row;
     }
