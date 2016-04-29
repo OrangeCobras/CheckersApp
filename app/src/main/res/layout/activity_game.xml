@@ -33,4 +33,13 @@
         android:horizontalSpacing="0dp"
         android:verticalSpacing="0dp"
         android:columnWidth="35dp" />
+        
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>
