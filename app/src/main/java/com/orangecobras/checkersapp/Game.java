@@ -43,7 +43,13 @@ public class Game extends AppCompatActivity implements CheckersFramework.View {
 
     @Override
     public void setStatus(Status status) {
-        this.status = status;
+        String text;
+        switch (status) {
+            case TurnBlackPlayer: text = "Turn: White Player"; break;
+            case TurnWhitePlayer: text = "Turn: White Player"; break;
+            default: text = "Game Ended";
+        }
+        turnText.setText(text);
     }
 
     @Override
