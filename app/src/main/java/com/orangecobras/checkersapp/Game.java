@@ -9,6 +9,9 @@ import CheckersFramework.Status;
 
 public class Game extends AppCompatActivity implements CheckersFramework.View {
 
+    private Status status;
+    private Board board;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
