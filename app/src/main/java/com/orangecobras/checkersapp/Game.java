@@ -12,10 +12,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import CheckersFramework.Board;
+import CheckersFramework.Direction;
+import CheckersFramework.Move;
+import CheckersFramework.MoveGetter;
 import CheckersFramework.Status;
 import CheckersFramework.Point;
 
-public class Game extends AppCompatActivity implements CheckersFramework.View {
+public class Game extends AppCompatActivity implements CheckersFramework.View, MoveGetter {
 
     private GridView gridView;
     private BoardAdapter adapter;
@@ -29,6 +32,9 @@ public class Game extends AppCompatActivity implements CheckersFramework.View {
         gridView = (GridView) findViewById(R.id.gridViewGame);
         gridView.setAdapter(adapter);
         turnText = (TextView) findViewById(R.id.textViewTurn);
+        // start the game
+        // CheckersFramework.Game game = new CheckersFramework.Game(this);
+        // game.start();
     }
 
     public void finish(View view) {
@@ -55,6 +61,12 @@ public class Game extends AppCompatActivity implements CheckersFramework.View {
     public void invalidate() {
         gridView.invalidate();
         turnText.invalidate();
+    }
+
+    @Override
+    public Move getMove() {
+        // get a move
+        return new Move(new Point(0, 0), Direction.NorthEeast, 1);
     }
 }
 
