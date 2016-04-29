@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import CheckersFramework.Board;
 import CheckersFramework.Status;
@@ -19,6 +20,7 @@ public class Game extends AppCompatActivity implements CheckersFramework.View {
     private Status status;
     private GridView gridView;
     private BoardAdapter adapter;
+    private TextView turnText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,7 @@ public class Game extends AppCompatActivity implements CheckersFramework.View {
         adapter = new BoardAdapter(this);
         gridView = (GridView) findViewById(R.id.gridViewGame);
         gridView.setAdapter(adapter);
+        turnText = (TextView) findViewById(R.id.textViewTurn);
     }
 
     public void finish(View view) {
