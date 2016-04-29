@@ -25,6 +25,7 @@ public class Game extends AppCompatActivity implements CheckersFramework.View {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         gridView = (GridView) findViewById(R.id.gridViewGame);
+        board = new Board(10);
         gridView.setAdapter(new BoardAdapter(this, board));
     }
 
@@ -65,7 +66,7 @@ class BoardAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return board.getPiece(new Point(i % 9, i / 9));
+        return board.getPiece(new Point(i % 10, i / 10));
     }
 
     @Override
@@ -77,7 +78,7 @@ class BoardAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         View row = view;
         ViewHolder holder;
-        int image;
+        int image = R.drawable.checkersboard;
         if (row == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(R.layout.single_cell, viewGroup, false);
@@ -86,21 +87,22 @@ class BoardAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) view.getTag();
         }
-        switch (board.getPiece(new Point(i % 9, i / 9))) {
-            case Black:
-                image = R.drawable.blackpiece;
-                break;
-            case BlackKing:
-                image = R.drawable.blackpieceking;
-                break;
-            case White:
-                image = R.drawable.whitepiece;
-                break;
-            case WhiteKing:
-                image = R.drawable.whitepieceking;
-                break;
-            default:
-                image = R.drawable.checkersboard;
+
+        if (board.getPiece(new Point(i % 10, i / 10)) != null) {
+            switch (board.getPiece(new Point(i % 10, i / 10))) {
+                case Black:
+                    image = R.drawable.blackpiece;
+                    break;
+                case BlackKing:
+                    image = R.drawable.blackpieceking;
+                    break;
+                case White:
+                    image = R.drawable.whitepiece;
+                    break;
+                case WhiteKing:
+                    image = R.drawable.whitepieceking;
+                    break;
+            }
         }
         holder.piece.setImageResource(image);
         return row;
