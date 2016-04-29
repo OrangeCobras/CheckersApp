@@ -45,7 +45,7 @@ public class Game extends AppCompatActivity implements CheckersFramework.View {
 
     @Override
     public void invalidate() {
-        // TODO
+        gridView.invalidate();
     }
 }
 
