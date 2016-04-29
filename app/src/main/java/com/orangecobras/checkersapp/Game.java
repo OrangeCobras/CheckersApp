@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import CheckersFramework.Board;
 import CheckersFramework.Status;
@@ -17,16 +18,20 @@ import CheckersFramework.Point;
 public class Game extends AppCompatActivity implements CheckersFramework.View {
 
     private Status status;
+    private Board board;
     private GridView gridView;
-    private BoardAdapter adapter;
+
+    TextView turnPlayerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        adapter = new BoardAdapter(this);
         gridView = (GridView) findViewById(R.id.gridViewGame);
-        gridView.setAdapter(adapter);
+        board = new Board(10);
+        gridView.setAdapter(new BoardAdapter(this, board));
+        turnPlayerView = (TextView)findViewById(R.id.textView);
+        turnPlayerView.setText("White Player's turn");
     }
 
     public void finish(View view) {
@@ -35,7 +40,7 @@ public class Game extends AppCompatActivity implements CheckersFramework.View {
 
     @Override
     public void setBoard(Board board) {
-        adapter.setBoard(board);
+        this.board = board;
     }
 
     @Override
@@ -45,22 +50,24 @@ public class Game extends AppCompatActivity implements CheckersFramework.View {
 
     @Override
     public void invalidate() {
-        gridView.invalidate();
+        switch(this.status){
+            case TurnWhitePlayer: turnPlayerView.setText("White Player");
+            case TurnBlackPlayer: turnPlayerView.setText("Black Player");
+            default: turnPlayerView.setText("Game ended");
+        }
+        turnPlayerView.invalidate();
     }
 }
+
 
 class BoardAdapter extends BaseAdapter {
 
     private Context context;
     private Board board;
 
-    public BoardAdapter(Context context) {
+    public BoardAdapter(Context context, Board b) {
         this.context = context;
-        this.board = new Board(10);
-    }
-
-    public void setBoard(Board board) {
-        this.board = board;
+        this.board = b;
     }
 
     @Override
@@ -82,7 +89,7 @@ class BoardAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         View row = view;
         ViewHolder holder;
-        int image = R.drawable.checkersboard;
+        int image = R.drawable.blackpiece;
         if (row == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(R.layout.single_cell, viewGroup, false);
