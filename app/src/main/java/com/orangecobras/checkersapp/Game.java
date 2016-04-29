@@ -4,7 +4,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class Game extends AppCompatActivity {
+import CheckersFramework.Board;
+import CheckersFramework.Status;
+
+public class Game extends AppCompatActivity implements CheckersFramework.View {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,4 +19,18 @@ public class Game extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
+    @Override
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    @Override
+    public void invalidate() {
+        // TODO
+    }
 }
