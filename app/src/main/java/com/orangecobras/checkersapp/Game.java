@@ -23,6 +23,7 @@ public class Game extends AppCompatActivity implements CheckersFramework.View {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         gridView = (GridView) findViewById(R.id.gridViewGame);
+        gridView.setAdapter(new BoardAdapter(board));
     }
 
     public void finish(View view) {
