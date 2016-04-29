@@ -25,8 +25,7 @@ public class Game extends AppCompatActivity implements CheckersFramework.View {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         gridView = (GridView) findViewById(R.id.gridViewGame);
-        board = new Board(10);
-        gridView.setAdapter(new BoardAdapter(this, board));
+        gridView.setAdapter(new BoardAdapter(this));
     }
 
     public void finish(View view) {
@@ -54,9 +53,13 @@ class BoardAdapter extends BaseAdapter {
     private Context context;
     private Board board;
 
-    public BoardAdapter(Context context, Board b) {
+    public BoardAdapter(Context context) {
         this.context = context;
-        this.board = b;
+        this.board = new Board(10);
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
     }
 
     @Override
