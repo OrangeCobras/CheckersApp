@@ -17,15 +17,16 @@ import CheckersFramework.Point;
 public class Game extends AppCompatActivity implements CheckersFramework.View {
 
     private Status status;
-    private Board board;
     private GridView gridView;
+    private BoardAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        adapter = new BoardAdapter(this);
         gridView = (GridView) findViewById(R.id.gridViewGame);
-        gridView.setAdapter(new BoardAdapter(this));
+        gridView.setAdapter(adapter);
     }
 
     public void finish(View view) {
@@ -34,7 +35,7 @@ public class Game extends AppCompatActivity implements CheckersFramework.View {
 
     @Override
     public void setBoard(Board board) {
-        this.board = board;
+        adapter.setBoard(board);
     }
 
     @Override
