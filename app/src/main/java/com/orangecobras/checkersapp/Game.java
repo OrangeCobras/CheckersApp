@@ -65,7 +65,7 @@ class BoardAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 100;
+        return board.getSize() * board.getSize();
     }
 
     @Override
