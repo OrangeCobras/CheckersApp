@@ -17,7 +17,6 @@ import CheckersFramework.Point;
 
 public class Game extends AppCompatActivity implements CheckersFramework.View {
 
-    private Status status;
     private GridView gridView;
     private BoardAdapter adapter;
     private TextView turnText;
