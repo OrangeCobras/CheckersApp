@@ -1,7 +1,9 @@
 package com.orangecobras.checkersapp;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -23,7 +25,7 @@ public class Game extends AppCompatActivity implements CheckersFramework.View {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         gridView = (GridView) findViewById(R.id.gridViewGame);
-        gridView.setAdapter(new BoardAdapter(board));
+        gridView.setAdapter(new BoardAdapter(this, board));
     }
 
     public void finish(View view) {
@@ -48,9 +50,11 @@ public class Game extends AppCompatActivity implements CheckersFramework.View {
 
 class BoardAdapter extends BaseAdapter {
 
+    private Context context;
     private Board board;
 
-    public BoardAdapter(Board b) {
+    public BoardAdapter(Context context, Board b) {
+        this.context = context;
         this.board = b;
     }
 
@@ -71,7 +75,35 @@ class BoardAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        return null;
+        View row = view;
+        ViewHolder holder;
+        int image;
+        if (row == null) {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            row = inflater.inflate(R.layout.single_cell, viewGroup, false);
+            holder = new ViewHolder(row);
+            row.setTag(holder);
+        } else {
+            holder = (ViewHolder) view.getTag();
+        }
+        switch (board.getPiece(new Point(i % 9, i / 9))) {
+            case Black:
+                image = R.drawable.blackpiece;
+                break;
+            case BlackKing:
+                image = R.drawable.blackpieceking;
+                break;
+            case White:
+                image = R.drawable.whitepiece;
+                break;
+            case WhiteKing:
+                image = R.drawable.whitepieceking;
+                break;
+            default:
+                image = R.drawable.checkersboard;
+        }
+        holder.piece.setImageResource(image);
+        return row;
     }
 
     class ViewHolder {
